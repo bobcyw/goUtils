@@ -30,8 +30,9 @@ func (inst *FileString)Write(data []byte) error{
 	if err != nil{
 		return err
 	}
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-    os.Mkdir(path, 0644)
+	dir := filepath.Dir(path)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+    os.Mkdir(dir, 0644)
 	}
 	//write file
 	return ioutil.WriteFile(string(*inst), data, 0644)
