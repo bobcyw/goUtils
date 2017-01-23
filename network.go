@@ -19,6 +19,7 @@ func (inst *NetworkString)Get() (htmlContent HtmlContent, err error){
 	}
 	htmlContent.Header = response.Header
 	htmlContent.Content, err = ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
 	if err != nil{
 		return
 	}
